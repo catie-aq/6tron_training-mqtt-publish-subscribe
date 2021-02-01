@@ -152,7 +152,11 @@ int main()
     /* MQTT Connection */
     client = new MQTTClient(&socket);
     socket.open(network);
-    rc = socket.connect(hostname, port);
+
+    network->gethostbyname(hostname, &a);
+    a.set_port(port);
+
+    rc = socket.connect(a);
     if(rc != 0){
         printf("Connection to MQTT broker Failed");
         return rc;
